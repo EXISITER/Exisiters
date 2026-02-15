@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXISITERS® | Official Store | Premium Screen & Camera Protection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            border-color: #25D366;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cod-shimmer {
+            background: linear-gradient(90deg, #0a0a0a, #1a1a1a, #0a0a0a);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .nav-link {
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-link.active {
+            color: #25D366;
+            font-weight: bold;
+        }
+
+        .placeholder-icon {
+            width: 80px;
+            height: 80px;
+            color: rgba(37, 211, 102, 0.4);
+            transition: color 0.4s ease, transform 0.4s ease;
+        }
+
+        .glass-card:hover .placeholder-icon {
+            color: rgba(37, 211, 102, 1);
+            transform: scale(1.1);
+        }
+
+        .page-section { display: none; }
+        .page-section.active { display: block; }
+        
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] bg-black/80 backdrop-blur-xl border border-white/10 px-6 py-3 rounded-full flex gap-6 md:gap-10 items-center shadow-2xl">
+        <span onclick="showPage('home')" class="nav-link active text-[10px] md:text-sm uppercase tracking-widest" id="nav-home">Store</span>
+        <span onclick="showPage('track')" class="nav-link text-[10px] md:text-sm uppercase tracking-widest" id="nav-track">Track</span>
+        <span onclick="showPage('contact')" class="nav-link text-[10px] md:text-sm uppercase tracking-widest" id="nav-contact">Contact</span>
+    </nav>
+
+    <!-- Header -->
+    <header class="py-20 px-4 text-center border-b border-white/10 relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent -z-10"></div>
+        <h1 class="text-5xl md:text-8xl font-black tracking-tighter mb-4">
+            EXISITERS<span class="text-xl md:text-2xl align-top">&reg;</span>
+        </h1>
+        <p class="text-lg md:text-2xl font-semibold tracking-widest text-[#25D366] uppercase">
+            Are you excited?
+        </p>
+    </header>
+
+    <!-- Sticky COD Bar -->
+    <div class="cod-shimmer py-4 px-4 text-center border-y border-white/5 sticky top-0 z-50 backdrop-blur-md">
+        <p class="text-xs md:text-sm font-medium">
+            <span class="bg-[#25D366] text-black px-2 py-0.5 rounded-full text-[10px] font-black mr-2 uppercase">COD Available</span> 
+            Pay <span class="text-[#25D366] font-bold">₹99 Token Advance</span> & Remaining ₹100 on Delivery!
+        </p>
+    </div>
+
+    <!-- PAGE: HOME (STORE) -->
+    <main id="page-home" class="page-section active max-w-7xl mx-auto px-6 py-16 md:py-24">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Complete Mobile Defense</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto italic text-sm">Luxury Diamond-Cut Camera Rings & 9H Screen Guards.</p>
+        </div>
+        
+        <!-- Category Filter -->
+        <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-12">
+            <button onclick="filterProducts('all')" id="btn-all" class="px-5 py-2 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold uppercase tracking-widest hover:border-[#25D366] transition-all">All</button>
+            <button onclick="filterProducts('iphone')" id="btn-iphone" class="px-5 py-2 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold uppercase tracking-widest hover:border-[#25D366] transition-all">iPhone</button>
+            <button onclick="filterProducts('android')" id="btn-android" class="px-5 py-2 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold uppercase tracking-widest hover:border-[#25D366] transition-all">Android</button>
+            <button onclick="filterProducts('screen')" id="btn-screen" class="px-5 py-2 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold uppercase tracking-widest hover:border-[#25D366] transition-all">Screen Guards</button>
+        </div>
+
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-10"></div>
+    </main>
+
+    <!-- PAGE: TRACK ORDER -->
+    <main id="page-track" class="page-section max-w-3xl mx-auto px-6 py-24 md:py-32">
+        <div class="glass-card rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 text-center border border-white/10">
+            <h2 class="text-3xl md:text-4xl font-black mb-6 gold-gradient-text">Track Order</h2>
+            <p class="text-gray-400 mb-10 text-sm">Enter your Order ID to get a status update via WhatsApp.</p>
+            <div class="space-y-4">
+                <input type="text" id="track-id" placeholder="Order ID (e.g. EX-5678)" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-[#25D366]">
+                <button onclick="trackOrder()" class="w-full bg-[#25D366] text-black py-4 md:py-5 rounded-2xl font-black text-sm uppercase">Track on WhatsApp</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- PAGE: CONTACT US -->
+    <main id="page-contact" class="page-section max-w-5xl mx-auto px-6 py-24 md:py-32">
+        <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+            <div class="glass-card rounded-[2rem] md:rounded-[3rem] p-8 md:p-10 border border-white/10">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-[#25D366]">Contact Us</h2>
+                <div class="space-y-6">
+                    <div>
+                        <p class="text-xs uppercase tracking-widest text-gray-500 mb-1">Office Location</p>
+                        <p class="font-bold text-sm md:text-base">Hyderabad, Telangana - 500064</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-widest text-gray-500 mb-1">WhatsApp Support</p>
+                        <p class="font-bold text-sm md:text-base">+91 9393402829</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-widest text-gray-500 mb-1">Email</p>
+                        <p class="font-bold text-sm md:text-base">ninitraders123@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col gap-6">
+                <div class="glass-card rounded-3xl p-8 border border-white/10">
+                    <h3 class="font-bold mb-2">Business Hours</h3>
+                    <p class="text-sm text-gray-400 italic">Mon-Sat: 10AM - 8PM</p>
+                </div>
+                <a href="https://wa.me/919393402829" target="_blank" class="glass-card rounded-3xl p-8 border border-[#25D366]/30 text-center hover:bg-[#25D366]/5 transition-all">
+                    <p class="text-[#25D366] font-black uppercase tracking-widest">Chat with Support</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- About & Policy Section -->
+    <section class="bg-white/[0.02] py-20 px-6 border-t border-white/5">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16">
+            <div class="space-y-6">
+                <h3 class="text-2xl md:text-3xl font-bold gold-gradient-text uppercase tracking-tighter">About EXISITERS&reg;</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    <strong>EXISITERS&reg;</strong> is a Hyderabad-based premium accessory brand (Pincode: 500064) focused on extreme durability and luxury design. Our mission is to protect your flagship investment without compromising on its aesthetic value.
+                </p>
+            </div>
+            <div class="space-y-6">
+                <h3 class="text-2xl md:text-3xl font-bold text-[#25D366] uppercase tracking-tighter">Policies</h3>
+                <div class="space-y-4">
+                    <p class="text-xs text-gray-400"><strong class="text-white">COD:</strong> ₹99 advance token required for all orders to ensure delivery intent. Balance ₹100 is payable to courier.</p>
+                    <p class="text-xs text-gray-400"><strong class="text-white">Returns:</strong> Mandatory 360&deg; unboxing video required for any damage claims.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 pb-32 text-center text-gray-600 text-[10px] border-t border-white/5 uppercase tracking-widest">
+        <p>&copy; 2026 EXISITERS&reg; Official | Shipped from Hyderabad</p>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active');
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.getElementById('nav-' + pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function trackOrder() {
+            const id = document.getElementById('track-id').value;
+            if(!id) return;
+            window.open(`https://wa.me/919393402829?text=Hi EXISITERS, I want to track order: ${id}`, '_blank');
+        }
+
+        const products = [
+            // IPHONE
+            { name: "iPhone 17 Pro Max Lens Set", category: "iphone", type: "Diamond Cut" },
+            { name: "iPhone 16 Pro Max Lens Set", category: "iphone", type: "Sapphire Grade" },
+            { name: "iPhone 11 to 15 Lens Set", category: "iphone", type: "All Colors" },
+            { name: "iPhone 7 to XR Lens Set", category: "iphone", type: "Classic Metal" },
+            
+            // SAMSUNG / MOTO / ANDROID
+            { name: "Samsung S24 Ultra Lens Set", category: "android", type: "Titanium" },
+            { name: "Samsung S23 Ultra Lens Set", category: "android", type: "Luxury Silver" },
+            { name: "Moto Edge 50/60 Lens Set", category: "android", type: "Glitter Edition" },
+            { name: "Moto Razr/G Series Lens Set", category: "android", type: "Premium Metal" },
+            { name: "OnePlus 12/12R Lens Set", category: "android", type: "Rainbow Edition" },
+
+            // SCREEN GUARDS
+            { name: "iPhone 11-17 Screen Guard", category: "screen", type: "9H Gorilla Glass" },
+            { name: "Samsung S23/S24 Ultra UV Guard", category: "screen", type: "Curved UV Glass" },
+            { name: "Moto Edge Series Screen Guard", category: "screen", type: "9H Premium Glass" },
+            { name: "Flagship Android Screen Guard", category: "screen", type: "9H HD Clear" }
+        ];
+
+        const grid = document.getElementById('product-grid');
+
+        function renderProducts(filter = 'all') {
+            grid.innerHTML = '';
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+            
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "glass-card rounded-[2.5rem] p-6 flex flex-col items-center group";
+                const waLink = `https://wa.me/919393402829?text=Hi EXISITERS! I want to order: ${encodeURIComponent(p.name)}. I agree to the ₹99 token policy.`;
+
+                card.innerHTML = `
+                    <div class="w-full aspect-square bg-white/5 rounded-[2rem] mb-8 flex items-center justify-center relative overflow-hidden">
+                        <svg class="placeholder-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
+                    <div class="text-center w-full">
+                        <h4 class="text-lg md:text-xl font-bold mb-1 group-hover:text-[#25D366] transition-colors">${p.name}</h4>
+                        <p class="text-[10px] text-gray-500 mb-6 uppercase tracking-widest">${p.type}</p>
+                        <div class="flex items-center justify-center gap-3 mb-8">
+                            <span class="text-2xl md:text-3xl font-black">₹199</span>
+                            <span class="text-[10px] text-gray-500 line-through">₹999</span>
+                        </div>
+                        <a href="${waLink}" target="_blank" class="w-full bg-[#25D366] text-black py-4 rounded-2xl font-black text-xs uppercase tracking-tighter active:scale-95 transition-all block">Order on WhatsApp</a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterProducts(category) {
+            renderProducts(category);
+            document.querySelectorAll('[id^="btn-"]').forEach(b => b.classList.remove('border-[#25D366]', 'text-[#25D366]', 'bg-white/10'));
+            document.getElementById('btn-' + category).classList.add('border-[#25D366]', 'text-[#25D366]', 'bg-white/10');
+        }
+
+        renderProducts();
+        filterProducts('all');
+    </script>
+</body>
+</html>
